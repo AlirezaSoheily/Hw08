@@ -1,4 +1,6 @@
 from random import choice
+import requests
+import json
 import re
 
 class Bank:
