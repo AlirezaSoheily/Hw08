@@ -45,14 +45,16 @@ class Bank:
             self.current_word_display.append('_')
         print(f'Word is {len(self.current_word)} letters long.')
         print(self.current_word_display)
+        print(self.current_word)
 
     def check_solve(self):
         self.not_solved = self.letters_guessed_counter < (len(self.current_word) * 3)
-
+        if "_" not in self.current_word_display:
+            self.not_solved = False
 
 class Player:
     def __init__(self, bank):
-        self.lives = len(bank.current_word) * 3
+        self.lives = (len(bank.current_word) * 3)
         self.answer = ''
         self.guess_validation_incomplete = True
 
@@ -102,12 +104,12 @@ class Main:
 
     while True:
         word_bank = Bank()
-        player1 = Player(word_bank)
-        game = Processes()
-
         word_bank.get_word()
         word_bank.pick_topic()
         word_bank.pick_word()
+        player1 = Player(word_bank)
+        game = Processes()
+
 
         while word_bank.not_solved and player1.lives > 0:
             while player1.guess_validation_incomplete:
