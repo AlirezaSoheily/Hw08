@@ -32,7 +32,7 @@ class Bank:
         if response.status_code == 200:
             word = json.loads(response.text)
             self.api_response_status = True
-            self.current_word = word['word']
+            self.current_word = word['word'].lower()
         else:
             self.api_response_status = False
 
@@ -45,7 +45,6 @@ class Bank:
             self.current_word_display.append('_')
         print(f'Word is {len(self.current_word)} letters long.')
         print(self.current_word_display)
-        print(self.current_word)
 
     def check_solve(self):
         self.not_solved = self.letters_guessed_counter < (len(self.current_word) * 3)
